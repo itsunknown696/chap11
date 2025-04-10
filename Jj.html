@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Cyberpunk Neon Theme */
+        :root {
+          --neon-purple: #bc13fe;
+          --neon-pink: #ff00ff;
+          --neon-blue: #00ffff;
+          --neon-green: #00ff41;
+          --dark-purple: #8e44ad;
+          --deep-black: #000000;
+          --dark-gray: #121212;
+          --light-gray: #bdc3c7;
+          --matrix-green: #0f0;
+        }
+
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Orbitron', 'Rajdhani', sans-serif;
+          background-color: var(--deep-black);
+          color: var(--light-gray);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          flex-direction: column;
+          overflow-x: hidden;
+          position: relative;
+        }
+
+        /* Japanese Kanji Rain Background */
+        .kanji-rain {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          overflow: hidden;
+        }
+
+        .kanji {
+          position: absolute;
+          color: rgba(0, 255, 65, 0.3);
+          font-size: 20px;
+          writing-mode: vertical-rl;
+          text-orientation: upright;
+          animation: fall linear infinite;
+          text-shadow: 0 0 5px var(--matrix-green);
+          user-select: none;
+          z-index: -1;
+        }
+
+        @keyframes fall {
+          to {
+            transform: translateY(100vh);
+          }
+        }
+
+        /* Cyberpunk grid overlay */
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: 
+            linear-gradient(rgba(142, 68, 173, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(142, 68, 173, 0.05) 1px, transparent 1px);
+          background-size: 30px 30px;
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        .container {
+          text-align: center;
+          background: rgba(0, 0, 0, 0.85);
+          padding: 40px 30px;
+          border-radius: 0;
+          box-shadow: 
+            0 0 25px var(--neon-purple),
+            0 0 50px rgba(188, 19, 254, 0.3);
+          max-width: 500px;
+          width: 90%;
+          margin-bottom: 20px;
+          backdrop-filter: blur(5px);
+          border: 1px solid var(--neon-purple);
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.3s ease;
+          border-image: linear-gradient(45deg, var(--neon-purple), var(--neon-blue), var(--neon-pink)) 1;
+          z-index: 1;
+        }
+
+        .container:hover {
+          transform: translateY(-5px);
+          box-shadow: 
+            0 0 35px var(--neon-purple),
+            0 0 70px rgba(188, 19, 254, 0.4);
+        }
+
+        /* Cyberpunk corner accents */
+        .container::before, .container::after {
+          content: "";
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          border: 2px solid var(--neon-purple);
+          transition: all 0.3s ease;
+        }
+
+        .container::before {
+          top: 0;
+          left: 0;
+          border-right: none;
+          border-bottom: none;
+        }
+
+        .container::after {
+          bottom: 0;
+          right: 0;
+          border-left: none;
+          border-top: none;
+        }
+
+        .container:hover::before, .container:hover::after {
+          width: 50px;
+          height: 50px;
+          border-color: var(--neon-blue);
+        }
+
+        h1 {
+          font-size: 3.2rem;
+          margin-bottom: 5px;
+          color: var(--neon-purple);
+          text-shadow: 
+            0 0 10px var(--neon-purple),
+            0 0 20px var(--neon-purple);
+          letter-spacing: 3px;
+          font-weight: 700;
+          position: relative;
+          animation: textFlicker 3s infinite alternate;
+          text-transform: uppercase;
+        }
+
+        @keyframes textFlicker {
+          0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+            text-shadow: 
+              0 0 10px var(--neon-purple),
+              0 0 20px var(--neon-purple),
+              0 0 30px var(--neon-purple);
+          }
+          20%, 24%, 55% {
+            text-shadow: none;
+            color: var(--neon-blue);
+          }
+        }
+
+        h2 {
+          font-size: 1.8rem;
+          margin-bottom: 25px;
+          color: var(--light-gray);
+          letter-spacing: 2px;
+          position: relative;
+          text-transform: uppercase;
+        }
+
+        h2::after {
+          content: "";
+          display: block;
+          width: 100px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+          margin: 15px auto;
+        }
+
+        h3 {
+          font-size: 1.5rem;
+          margin-top: 0;
+          color: var(--light-gray);
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          position: relative;
+        }
+
+        h3::before {
+          content: ">> ";
+          color: var(--neon-green);
+        }
+
+        h3::after {
+          content: " <<";
+          color: var(--neon-green);
+        }
+
+        .lecture-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .lecture-list li {
+          margin: 15px 0;
+          position: relative;
+        }
+
+        .lecture-list a {
+          text-decoration: none;
+        }
+
+        .lecture-button {
+          display: inline-block;
+          padding: 12px 40px;
+          background: linear-gradient(135deg, var(--dark-gray), var(--dark-purple));
+          color: white;
+          font-size: 1.2rem;
+          font-weight: 600;
+          border: none;
+          border-radius: 0;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 
+            0 0 10px rgba(188, 19, 254, 0.3),
+            inset 0 0 5px rgba(255, 255, 255, 0.1);
+          position: relative;
+          overflow: hidden;
+          letter-spacing: 1px;
+          clip-path: polygon(
+            0 0,
+            100% 0,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
+            0 100%
+          );
+          text-transform: uppercase;
+          z-index: 1;
+        }
+
+        .lecture-button::before {
+          content: "";
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background: linear-gradient(45deg, 
+            var(--neon-purple), 
+            var(--neon-blue), 
+            var(--neon-pink));
+          z-index: -1;
+          background-size: 200% 200%;
+          animation: gradientBorder 3s ease infinite;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          clip-path: polygon(
+            0 0,
+            100% 0,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
+            0 100%
+          );
+        }
+
+        .lecture-button:hover::before {
+          opacity: 1;
+        }
+
+        .lecture-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 
+            0 0 20px rgba(188, 19, 254, 0.5),
+            inset 0 0 10px rgba(255, 255, 255, 0.2);
+          background: linear-gradient(135deg, var(--dark-purple), var(--dark-gray));
+          color: var(--neon-green);
+        }
+
+        .lecture-button::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: 0.5s;
+        }
+
+        .lecture-button:hover::after {
+          left: 100%;
+        }
+
+        @keyframes gradientBorder {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        .footer {
+          text-align: center;
+          font-size: 0.9rem;
+          color: var(--light-gray);
+          margin-top: 20px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+
+        .footer span {
+          color: var(--neon-purple);
+          font-weight: 600;
+        }
+
+        .social-link {
+          color: var(--neon-purple);
+          text-decoration: none;
+          margin: 0 5px;
+          transition: all 0.3s ease;
+          position: relative;
+          font-weight: 600;
+        }
+
+        .social-link:hover {
+          color: var(--neon-blue);
+          text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .social-link::after {
+          content: "";
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: var(--neon-blue);
+          transition: width 0.3s ease;
+        }
+
+        .social-link:hover::after {
+          width: 100%;
+        }
+
+        .social-link img {
+          vertical-align: middle;
+          margin-right: 5px;
+          filter: drop-shadow(0 0 5px var(--neon-purple));
+          transition: filter 0.3s ease;
+        }
+
+        .social-link:hover img {
+          filter: drop-shadow(0 0 5px var(--neon-blue));
+        }
+
+        .back-to-top {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: var(--dark-gray);
+          color: var(--neon-purple);
+          border: 1px solid var(--neon-purple);
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
+          box-shadow: 
+            0 0 10px var(--neon-purple),
+            inset 0 0 5px var(--neon-purple);
+          display: none;
+          transition: all 0.3s ease;
+          font-size: 1.5rem;
+          z-index: 100;
+        }
+
+        .back-to-top:hover {
+          background: var(--neon-purple);
+          color: var(--deep-black);
+          box-shadow: 
+            0 0 20px var(--neon-purple),
+            inset 0 0 10px var(--deep-black);
+          transform: scale(1.1);
+          border-color: var(--neon-blue);
+        }
+
+        /* Cyberpunk glitch effect */
+        .glitch {
+          position: relative;
+        }
+
+        .glitch::before, .glitch::after {
+          content: attr(data-text);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.8;
+        }
+
+        .glitch::before {
+          color: var(--neon-blue);
+          animation: glitch-effect 3s infinite;
+          z-index: -1;
+        }
+
+        .glitch::after {
+          color: var(--neon-pink);
+          animation: glitch-effect 2s infinite reverse;
+          z-index: -2;
+        }
+
+        @keyframes glitch-effect {
+          0% { transform: translate(0); }
+          20% { transform: translate(-3px, 3px); }
+          40% { transform: translate(-3px, -3px); }
+          60% { transform: translate(3px, 3px); }
+          80% { transform: translate(3px, -3px); }
+          100% { transform: translate(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          h1 {
+            font-size: 2.5rem;
+          }
+          
+          h2 {
+            font-size: 1.5rem;
+          }
+          
+          .lecture-button {
+            padding: 10px 30px;
+            font-size: 1rem;
+          }
+          
+          .footer {
+            font-size: 0.8rem;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="kanji-rain" id="kanjiRain"></div>
+    
+    <div class="container">
+        <h1 class="glitch" data-text="Juj">Juj</h1><br>
+        <h2>Ju</h2><br>
+        <h3>Gg</h3><br>
+        <ul class="lecture-list">
+           
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64a2d055802f59fb88c4def6/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64a4154f802f59fb88c6423d/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64a52bbb69e7c3a728795186/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64c6632d6e9978072b2a287c/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64c7a823b160f32c8425fc28/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64c90f8b6e9978072b2d6cb2/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64cba5336e9978072b30eb9f/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64ccf57f6e9978072b32acf7/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/66a9da5ac50a970c3584da49/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Rotation L05 Toppling</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/65047418734b790a42a6a691/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/65060df1734b790a42a88199/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/65071c88734b790a42a98b08/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/650aa96a734b790a42ad3f8b/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/650c27bb1ffd3734c4e3c174/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/654ce050734b790a420398c1/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/655369641ffd3734c43d1f34/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/6555c777734b790a420a4038/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/6558aaeb1ffd3734c441a053/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/655b8386734b790a420f9a76/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64d4ef38b160f32c84386f94/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64d64924297c088990f91b34/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64da20b3297c088990fdeac3/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64dc8800297c08899000b0d7/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64de2a8e297c0889900316b5/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64df7364297c08899004cded/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 6 Part 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64e20022d5a64f03644adf91/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 6 Part 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64e76281d5a64f0364519343/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64e8a810297c088990100d28/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64ea0f0ad5a64f036454c20a/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64ed0c6c297c08899014dcb2/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64ee2ade297c0889901623cd/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64f6c0af297c0889901e6b39/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64f77860297c0889901f9525/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64fa16d2297c08899022a647/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64fce15cd5a64f036468e658/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64fe18f8d5a64f03646a4e7d/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5 Part 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/64ff6e10d5a64f03646bd853/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lec 5 Part 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/6511a97d1ffd3734c4eaac07/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/6512f944734b790a42b7e8ae/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/65142ef1734b790a42b9870a/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/6516d57e734b790a42bd5951/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/65187ec9734b790a42bfb4e9/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5 Part 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/651909ec1ffd3734c4f4b086/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 5 Part 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/653fab231ffd3734c427d8e0/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/6540f102734b790a42f4eefd/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/6543a8d81ffd3734c42cf1f4/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/65465403734b790a42fbcee5/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 4</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/652d280d734b790a42dc23c3/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 1.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/652e94531ffd3734c412c703/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 2.m4v</button></a></li>
+           <li><a href="https://master-api-v3.vercel.app/nomis-player?url=https://media-cdn.classplusapp.com/drm/652fc806734b790a42dff821/playlist.m3u8" target="_blank"><button class="lecture-button">Lectures -&gt; Lecture 3</button></a></li>
+           <li><a href="https://youtu.be/Tba8arFqBFw?si=q01kKfamn4rKW_er" target="_blank"><button class="lecture-button">How To Process Links</button></a></li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>Leaked by <span>Nomis</span> | From <span>IIT School Institute (Ju)</span> | <br><br><br>
+            <a href="https://t.me/ItsNomis" target="_blank" class="social-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" width="16"> Telegram
+            </a> | 
+            <a href="http://www.aboutnomis.carrd.co" target="_blank" class="social-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Website" width="16"> Website
+            </a>
+        </p>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">⬆️</button>
+
+    <script>
+        // Back to Top Button functionality
+        const backToTopBtn = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+          backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+
+        function scrollToTop() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Japanese Kanji Rain Animation
+        const kanjiCharacters = ['侍', '忍', '龍', '鬼', '刀', '影', '闇', '光', '電', '夢', '愛', '戦', '死', '生', '風', '火', '水', '土', '空', '心'];
+        const kanjiContainer = document.getElementById('kanjiRain');
+        const kanjiCount = 50;
+
+        function createKanji() {
+          const kanji = document.createElement('div');
+          kanji.className = 'kanji';
+          kanji.textContent = kanjiCharacters[Math.floor(Math.random() * kanjiCharacters.length)];
+          kanji.style.left = Math.random() * 100 + 'vw';
+          kanji.style.animationDuration = (Math.random() * 5 + 3) + 's';
+          kanji.style.opacity = Math.random() * 0.5 + 0.1;
+          kanji.style.fontSize = (Math.random() * 10 + 16) + 'px';
+          kanji.style.zIndex = -1;
+          kanjiContainer.appendChild(kanji);
+          
+          setTimeout(() => {
+            kanji.remove();
+          }, 8000);
+        }
+
+        // Initialize kanji rain  
+        function initKanjiRain() {
+          for (let i = 0; i < kanjiCount; i++) {
+            setTimeout(createKanji, i * 200);
+          }
+          setInterval(createKanji, 300);
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+          initKanjiRain();
+          
+          // Add any other initialization code here
+          backToTopBtn.style.display = 'none'; // Hide back-to-top button initially
+        });
+    </script>
+</body>
+</html>
